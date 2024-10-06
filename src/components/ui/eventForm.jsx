@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { FaTimes } from 'react-icons/fa'; // Importing the close icon
 
 const EventForm = () => {
   const [event, setEvent] = useState({
@@ -13,9 +14,8 @@ const EventForm = () => {
     contactPhone: '',
     eventType: '',
     multipleAttendees: false,
-    feedback: '',
   });
-
+const [closeForm,setCloseForm] = useState(true)
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setEvent({
@@ -30,10 +30,27 @@ const EventForm = () => {
     // Logic to send event data to the server
   };
 
+  const handleClose = () => {
+    setCloseForm(false)
+    console.log('Form closed');
+  };
+
   return (
-    <div className="container mx-auto px-4 py-6">
-      <h2 className="text-2xl font-bold text-blue-600 mb-4">Add New Event</h2>
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
+    <>
+    {closeForm && (
+    <div className="container mx-auto px-4 py-6 max-w-lg"> 
+      <form 
+        onSubmit={handleSubmit} 
+        className="bg-white shadow-md rounded-lg p-6 overflow-y-auto max-h-screen" 
+        style={{ maxHeight: '80vh' }} 
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-black">Add New Event</h2>
+          <button type="button" onClick={handleClose} className="text-gray-600 hover:text-gray-800">
+            <FaTimes size={20} />
+          </button>
+        </div>
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700" htmlFor="name">Event Name</label>
           <input 
@@ -168,21 +185,9 @@ const EventForm = () => {
           </label>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700" htmlFor="feedback">Feedback Section</label>
-          <textarea 
-            name="feedback" 
-            id="feedback" 
-            value={event.feedback} 
-            onChange={handleChange}
-            rows="3"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
-          />
-        </div>
-
         <button 
           type="submit" 
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+          className="w-full bg-black text-white py-2 rounded-md hover:bg-white hover:text-black transition">
           Save Event
         </button>
 
@@ -191,6 +196,8 @@ const EventForm = () => {
         </div>
       </form>
     </div>
+    )}
+    </>
   );
 };
 
