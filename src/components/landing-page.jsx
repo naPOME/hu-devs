@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { NavBar } from "./navBar";
 import { Input } from "@/components/ui/input";
 import {
   Code,
@@ -15,32 +16,7 @@ import Link from "next/link";
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-black font-nunito">
-      <header className="px-4 lg:px-6 h-16 flex items-center bg-white sticky text-blue-700">
-        <a className="flex items-center justify-center" href="#">
-          <Code className="h-6 w-6" />
-          <span className="ml-2 text-lg font-bold">HUDC</span>
-        </a>
-        <nav className="ml-auto flex  gap-4 sm:gap-6">
-          <a
-            className="text-sm font-bold hover:underline underline-offset-4"
-            href="#features"
-          >
-            why join us
-          </a>
-          <a
-            className="text-sm font-bold hover:underline underline-offset-4"
-            href="#about"
-          >
-            about
-          </a>
-          <a
-            className="text-sm font-bold hover:underline underline-offset-4"
-            href="#contact"
-          >
-            contact
-          </a>
-        </nav>
-      </header>
+      <NavBar/>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-blue-800 text-white">
           <div className="container px-4 md:px-6">
