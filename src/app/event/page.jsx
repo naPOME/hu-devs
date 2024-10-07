@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import EventForm from '@/components/ui/eventForm';
+import { NavBar } from '@/components/navBar';
 
 const EventLandingPage = () => {
   const [events, setEvents] = useState([
@@ -31,7 +32,7 @@ const EventLandingPage = () => {
   };
 
   const handleEventSubmit = (newEvent) => {
-    const newId = events.length + 1; // Generate a new ID
+    const newId = events.length + 1; 
     setEvents((prevEvents) => [
       ...prevEvents,
       { id: newId, ...newEvent },
@@ -40,21 +41,22 @@ const EventLandingPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 font-nunito">
+      <NavBar/>
       <header className="flex justify-between items-center py-4">
         <h1 className="text-3xl font-bold text-black">Upcoming Events</h1>
-        <button onClick={handleAddEvent} className="bg-black text-white py-2 px-4 rounded hover:bg-white hover:text-black">
+        <button onClick={handleAddEvent} className="bg-black text-white py-2 px-4 rounded font-bold  hover:bg-white hover:text-black font-nunito">
           Add Event  
         </button>
       </header>
       
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map(event => (
-          <div key={event.id} className="border border-gray-600 p-4 rounded-lg shadow">
-            <h2 className="font-semibold text-lg">{event.name}</h2>
-            <p className="text-sm text-gray-500">{new Date(event.date).toLocaleString()}</p>
-            <p className="text-sm text-gray-600">{event.location}</p>
-            <p className="mt-2 text-sm">{event.description}</p>
+          <div key={event.id} className="border border-gray-900 p-4 rounded-lg shadow">
+            <h2 className="font-bold text-lg">{event.name}</h2>
+            <p className="text-sm text-gray-900 font-thin">{new Date(event.date).toLocaleString()}</p>
+            <p className="text-sm text-gray-900 font-normal">{event.location}</p>
+            <p className="mt-2 text-xs font-bold">{event.description}</p>
             <button className="mt-4 bg-black text-white py-1 px-2 rounded">More Info...</button>
           </div>
         ))}
